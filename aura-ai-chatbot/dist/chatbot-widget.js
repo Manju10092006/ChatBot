@@ -50,7 +50,7 @@
   // ── Main init ─────────────────────────────────────────────────────────────
   window.AuraChatbot = {
     init: function (opts) {
-      var API_URL  = (opts && opts.apiUrl)  || "http://localhost:5000/chat";
+      var API_URL  = (opts && opts.apiUrl)  || "https://chatbot-030u.onrender.com/chat";
       var BOT_NAME = (opts && opts.botName) || "Aura";
 
       var messages   = [];
