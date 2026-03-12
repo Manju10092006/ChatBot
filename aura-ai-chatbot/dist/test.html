@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Chatbot Widget Test</title>
+  <style>
+    body { font-family: sans-serif; margin: 60px; background: #f5f0e8; color: #333; }
+    h1 { margin-bottom: 8px; }
+    p { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>My Website</h1>
+  <p>The Aura chatbot widget is loaded in the bottom-right corner. Click the star button to open it.</p>
+
+  <!-- Load the widget -->
+  <script src="chatbot-widget.js"></script>
+  <script>
+    AuraChatbot.init({
+      apiUrl: "http://localhost:5000/chat",
+      botName: "Aura"
+    });
+  </script>
+</body>
+</html>

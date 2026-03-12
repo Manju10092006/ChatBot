@@ -1,0 +1,32 @@
+{
+  "name": "aura-ai-chatbot",
+  "version": "1.0.0",
+  "description": "A production-ready, embeddable AI chatbot widget powered by Google Gemini",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "files": [
+    "src/",
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build:widget": "node build-widget.js"
+  },
+  "keywords": [
+    "chatbot",
+    "ai",
+    "gemini",
+    "react",
+    "widget",
+    "aura"
+  ],
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
