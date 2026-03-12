@@ -6,8 +6,15 @@
  * Usage:
  *   <script src="chatbot-widget.js"></script>
  *   <script>
- *     AuraChatbot.init({ apiUrl: "https://api.myserver.com/chat", botName: "Aura" });
+ *     AuraChatbot.init({
+ *       apiUrl: "https://api.myserver.com/chat",
+ *       geminiApiKey: "YOUR_GEMINI_API_KEY",  // each site must supply its own key
+ *       botName: "Aura"
+ *     });
  *   </script>
+ *
+ * The geminiApiKey is forwarded to the backend with every request so the
+ * server never needs a hard-coded or environment-variable API key.
  */
 (function () {
   "use strict";
@@ -50,8 +57,10 @@
   // ── Main init ─────────────────────────────────────────────────────────────
   window.AuraChatbot = {
     init: function (opts) {
-      var API_URL  = (opts && opts.apiUrl)  || "https://chatbot-030u.onrender.com/chat";
-      var BOT_NAME = (opts && opts.botName) || "Aura";
+      var API_URL       = (opts && opts.apiUrl)       || "https://chatbot-030u.onrender.com/chat";
+      var BOT_NAME      = (opts && opts.botName)      || "Aura";
+      // API key provided by the embedding site — forwarded to the backend proxy.
+      var GEMINI_API_KEY = (opts && opts.geminiApiKey) || null;
 
       var messages   = [];
       var isOpen     = false;
@@ -395,10 +404,11 @@
 
         try {
           var apiMsgs = messages.map(function (m) { return { role: m.role, content: m.content }; });
+          // Include the user's Gemini API key so the backend can proxy the request.
           var res = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ messages: apiMsgs }),
+            body: JSON.stringify({ messages: apiMsgs, apiKey: GEMINI_API_KEY }),
           });
           if (!res.ok) throw new Error("Server error " + res.status);
           var data = await res.json();
